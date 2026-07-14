@@ -6,21 +6,11 @@ This project tries to adhere to [Semantic Versioning][2].
 
 ## [Unreleased]
 
-## [1.1.3] - 2025-07-25
-
-### Fixed
-
-Fixed tiny GTK dropdown menu on Hyprland (Aleksanaa)
-
-## [1.1.2] - 2025-07-25
-
-### Fixed
-
-Fixed compilation error with new GCC (ceamac)
-
 ## [1.1.1] - 2023-07-01
 
 ### Added
+
+Support for saving kanshi config file
 
 Added QtCreator files to .gitignore (redtide)
 .editorconfig and .clang-format (redtide)
