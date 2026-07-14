@@ -171,7 +171,7 @@ struct profile_line match(char **descriptions, int num, const char *filename) {
 }
 
 int wd_store_config(struct wl_list *outputs) {
-  const char *file_name = wd_get_kanshi_config();
+  char *file_name = wd_get_config_file_path();
   char tmp_file_name[PATH_MAX];
   sprintf(tmp_file_name, "%s.tmp", file_name);
 

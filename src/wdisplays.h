@@ -349,11 +349,6 @@ void wd_destroy_overlay(struct wd_output *output);
 char *wd_get_config_file_path();
 
 /*
- * Returns kanshi config path
- */
-char *wd_get_kanshi_config();
-
-/*
  * Updates kanshi config
  */
 int wd_store_config(struct wl_list *outputs);
