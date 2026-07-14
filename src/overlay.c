@@ -60,7 +60,12 @@ static PangoLayout *create_text_layout(struct wd_head *head,
 }
 
 static void resize(struct wd_output *output) {
+  if (output->overlay_window == NULL || output->overlay_layer_surface == NULL)
+    return;
+
   struct wd_head *head = wd_find_head(output->state, output);
+  if (head == NULL)
+    return;
 
   uint32_t screen_width = head->custom_mode.width;
   uint32_t screen_height = head->custom_mode.height;
@@ -138,14 +143,11 @@ void window_map(GtkWidget *widget, gpointer data) {
   resize(output);
 }
 
-void window_unmap(GtkWidget *widget, gpointer data) {
-  struct wd_output *output = data;
-  zwlr_layer_surface_v1_destroy(output->overlay_layer_surface);
-}
-
 gboolean window_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
   struct wd_output *output = data;
   struct wd_head *head = wd_find_head(output->state, output);
+  if (head == NULL)
+    return TRUE;
 
   GtkStyleContext *style_ctx = gtk_widget_get_style_context(widget);
   GdkRGBA fg;
@@ -177,8 +179,6 @@ void wd_create_overlay(struct wd_output *output) {
       G_CALLBACK(window_realize), output);
   g_signal_connect(output->overlay_window, "map",
       G_CALLBACK(window_map), output);
-  g_signal_connect(output->overlay_window, "unmap",
-      G_CALLBACK(window_unmap), output);
   g_signal_connect(output->overlay_window, "draw",
       G_CALLBACK(window_draw), output);
 
@@ -190,6 +190,10 @@ void wd_create_overlay(struct wd_output *output) {
 
 void wd_destroy_overlay(struct wd_output *output) {
   if (output->overlay_window != NULL) {
+    if (output->overlay_layer_surface != NULL) {
+      zwlr_layer_surface_v1_destroy(output->overlay_layer_surface);
+      output->overlay_layer_surface = NULL;
+    }
     gtk_widget_destroy(output->overlay_window);
     output->overlay_window = NULL;
   }
