@@ -72,7 +72,7 @@ char *wd_get_config_file_path() {
           ; // store_path was not followed by an equal sign on this line
       } else
         ; // this line does not contain store_path
-    }     // reached end of file
+    } // reached end of file
     fclose(wdisplaysFile);
   } else { // can't open config file
     dprintf(2, "%s:%i:%s(): Can't open %s : ", __FILE__, __LINE__, __func__, wdisplaysPath);
@@ -171,6 +171,12 @@ struct profile_line match(char **descriptions, int num, const char *filename) {
 }
 
 int wd_store_config(struct wl_list *outputs) {
+  // A space-separated string containing the output manufacturer, model and
+  // serial number (e.g. "Foocorp ASDF 1234"). A wildcard pattern can be used
+  // (e.g. "Foocorp ASDF \*"), see *glob*(7). If one of these fields is
+  // missing, it needs to be populated with the string "Unknown" (e.g.
+  // "Foocorp ASDF Unknown").
+
   char *file_name = wd_get_config_file_path();
   char tmp_file_name[PATH_MAX];
   sprintf(tmp_file_name, "%s.tmp", file_name);
@@ -200,12 +206,19 @@ int wd_store_config(struct wl_list *outputs) {
     };
 
     if (description_index < HEADS_MAX) {
-      descriptions[description_index] = strdup(head->description);
-      // write output config in given format
+      char *nameTriplet = (char *)malloc(MAX_NAME_LENGTH);
+
+      sprintf(nameTriplet, "%s %s %s", head->make ? head->make : "Unknown", head->model ? head->model : "Unknown",
+              head->serial_number ? head->serial_number : "Unknown");
+
+      descriptions[description_index] = strdup(nameTriplet);
+
       sprintf(outputConfigs[description_index], "output \"%s\" position %d,%d mode %dx%d@%.4f scale %.2f transform %s",
-              head->description, output->x, output->y, output->width, output->height, output->refresh / 1.0e3, output->scale,
+              nameTriplet, output->x, output->y, output->width, output->height, output->refresh / 1.0e3, output->scale,
               trans_str);
       description_index++;
+
+      free(nameTriplet);
     } else {
       dprintf(2, "Too many monitor!\n\t%i is the maximum allowed number", HEADS_MAX);
       return 1;

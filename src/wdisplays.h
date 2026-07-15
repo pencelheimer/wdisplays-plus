@@ -104,21 +104,30 @@ struct wd_head {
   cairo_surface_t *surface;
 
   uint32_t id;
-  char *name, *description;
-  int32_t phys_width, phys_height; // mm
+  char *name;
+  char *description;
+  int32_t phys_width_mm;
+  int32_t phys_height_mm;
   struct wl_list modes;
 
   bool enabled;
   struct wd_mode *mode;
 
   struct {
-    int32_t width, height;
+    int32_t width;
+    int32_t height;
     int32_t refresh;
   } custom_mode;
 
-  int32_t x, y;
+  int32_t x;
+  int32_t y;
   enum wl_output_transform transform;
   double scale;
+
+  char *make;
+  char *model;
+  char *serial_number;
+  uint32_t adaptive_sync;
 };
 
 struct wd_gl_data;

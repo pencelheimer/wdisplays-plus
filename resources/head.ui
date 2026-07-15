@@ -389,10 +389,31 @@
       </packing>
     </child>
     <child>
-      <placeholder/>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Kanshi ID</property>
+        <property name="xalign">1</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">9</property>
+      </packing>
     </child>
     <child>
-      <placeholder/>
+      <object class="GtkLabel" id="kanshi_name">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="wrap">True</property>
+        <property name="wrap_mode">word-char</property>
+        <property name="ellipsize">end</property>
+        <property name="xalign">0</property>
+        <property name="selectable">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">9</property>
+      </packing>
     </child>
   </template>
 </interface>

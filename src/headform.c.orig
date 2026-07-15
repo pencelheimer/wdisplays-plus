@@ -206,14 +206,11 @@ void wd_head_form_update(WdHeadForm *form, const struct wd_head *head, enum wd_h
   WdHeadFormPrivate *priv = wd_head_form_get_instance_private(form);
   if (!fields) return;
 
-  if (fields & WD_FIELD_DESCRIPTION) {
-    gtk_label_set_text(GTK_LABEL(priv->description), head->description);
-  }
-  if (fields & (WD_FIELD_MAKE | WD_FIELD_MODEL | WD_FIELD_SERIAL_NUMBER)) {
-    g_autofree gchar *kanshi_str = g_strdup_printf("%s %s %s", head->make ? head->make : "Unknown",
-                                                   head->model ? head->model : "Unknown",
-                                                   head->serial_number ? head->serial_number : "Unknown");
-    gtk_label_set_text(GTK_LABEL(priv->kanshi_name), kanshi_str);
+  if (fields & (WD_FIELD_DESCRIPTION | WD_FIELD_MAKE | WD_FIELD_MODEL | WD_FIELD_SERIAL_NUMBER)) {
+    g_autofree gchar *desc_str = g_strdup_printf("%s\nKanshi: %s %s %s", head->description ? head->description : "Unknown",
+                                                 head->make ? head->make : "Unknown", head->model ? head->model : "Unknown",
+                                                 head->serial_number ? head->serial_number : "Unknown");
+    gtk_label_set_text(GTK_LABEL(priv->description), desc_str);
   }
   if (fields & WD_FIELD_PHYSICAL_SIZE) {
     g_autofree gchar *physical_str = g_strdup_printf("%dmm × %dmm", head->phys_width_mm, head->phys_height_mm);
