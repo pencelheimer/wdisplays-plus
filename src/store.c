@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // SPDX-FileCopyrightText: 2024-2025 Shaochang Tan
 // SPDX-FileCopyrightText: 2024-2025 Jason André Charles Gantner
+// SPDX-FileCopyrightText: 2026 pencelheimer <pencelheimer@proton.me>
 
 #include "wdisplays.h"
 #include <ctype.h>

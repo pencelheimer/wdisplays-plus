@@ -1,4 +1,5 @@
 /* SPDX-FileCopyrightText: 2020 Jason Francis <jason@cycles.network>
+ * SPDX-FileCopyrightText: 2026 pencelheimer <pencelheimer@proton.me>
  * SPDX-License-Identifier: GPL-3.0-or-later */
 
 #ifndef WDISPLAY_HEADFORM_H

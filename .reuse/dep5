@@ -1,10 +1,11 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: wdisplays
-Upstream-Contact: Jason Francis <jason@cycles.network>
-Source: <https://cyclopsian.github.io/wdisplays>
+Upstream-Name: wdisplays-plus
+Upstream-Contact: pencelheimer <pencelheimer@proton.me>
+Source: <https://github.com/pencelheimer/wdisplays-plus>
 
 Files: README.md .gitignore
 Copyright: 2020 Jason Francis <jason@cycles.network>
+           2026 pencelheimer <pencelheimer@proton.me>
 License: CC0-1.0
 
 Files: resources/style.css resources/wdisplays.desktop.in resources/*.ui
@@ -30,4 +31,5 @@ License: MIT
 
 Files: resources/wdisplays.gschema.xml
 Copyright: 2026 Lauren Lagarde <lauren@lagarde.dev>
+           2026 pencelheimer <pencelheimer@proton.me>
 License: MIT

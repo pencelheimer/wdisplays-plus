@@ -1,4 +1,5 @@
 /* SPDX-FileCopyrightText: 2019 Jason Francis <jason@cycles.network>
+ * SPDX-FileCopyrightText: 2026 pencelheimer <pencelheimer@proton.me>
  * SPDX-License-Identifier: GPL-3.0-or-later */
 /* SPDX-FileCopyrightText: 2017-2019 Simon Ser
  * SPDX-License-Identifier: MIT */
